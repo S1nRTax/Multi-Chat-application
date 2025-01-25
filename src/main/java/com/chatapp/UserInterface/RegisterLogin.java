@@ -1,33 +1,31 @@
 package com.chatapp.UserInterface;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 
-import java.util.Objects;
+import java.io.IOException;
 
-public class RegisterLogin extends Application {
+public class RegisterLogin {
 
-    @Override
-    public void start(Stage primaryStage) {
+    public BorderPane createContent() {
+        BorderPane root = new BorderPane();
+
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/chatapp/UserInterface/LoginRegister.fxml")));
-            // Set up the scene
-            Scene scene = new Scene(root, 600, 400);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Chat App - Register/Login");
-            primaryStage.show();
-        } catch (Exception e) {
-            // Handle any errors that occur during FXML loading
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/chatapp/UserInterface/RegisterLogin.fxml"));
+            Parent fxmlRoot = loader.load();
+            root.setCenter(fxmlRoot);
+            RegisterLoginController controller = loader.getController();
+            if (controller != null) {
+                System.out.println("FXML controller loaded successfully.");
+            }
+        } catch (IOException e) {
+            // Handle errors during FXML loading
             System.err.println("Error loading FXML file: " + e.getMessage());
             e.printStackTrace();
         }
-    }
 
-    public static void main(String[] args) {
-        // Launch the JavaFX application
-        launch(args);
+        return root;
     }
 }

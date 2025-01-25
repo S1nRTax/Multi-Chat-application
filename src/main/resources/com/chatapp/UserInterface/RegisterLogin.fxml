@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="RegisterLoginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="loginPane" layoutX="138.0" layoutY="141.0" prefHeight="461.0" prefWidth="727.0">
+         <children>
+            <TextField fx:id="emailTextField" layoutX="137.0" layoutY="171.0" prefHeight="25.0" prefWidth="355.0" promptText="Enter your e-mail" styleClass="input-field" />
+            <Text fx:id="emailLabel" layoutX="137.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login-labels" text="USERNAME OR EMAIL *" wrappingWidth="263.0" />
+            <PasswordField fx:id="passwordField" layoutX="137.0" layoutY="238.0" prefHeight="25.0" prefWidth="355.0" promptText="Enter your password" styleClass="input-field" />
+            <Text fx:id="passwordLabel" layoutX="137.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login-labels" text="PASSWORD *" wrappingWidth="263.0" />
+            <Text layoutX="137.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcome-label" text="Welcome back !" textAlignment="CENTER" wrappingWidth="355.0" />
+            <Text layoutX="137.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="excited-label" text="We're so excited to see you again" textAlignment="CENTER" wrappingWidth="355.0" />
+            <Hyperlink layoutX="137.0" layoutY="271.0" prefHeight="23.0" prefWidth="146.0" styleClass="custom-hyperlink" text="Forgot your password?" />
+            <Button fx:id="loginButton" layoutX="137.0" layoutY="309.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="355.0" styleClass="custom-button" text="Log in" />
+            <Text layoutX="137.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="need-account" text="Need an account?" wrappingWidth="106.13671875" />
+            <Hyperlink layoutX="230.0" layoutY="354.0" prefHeight="23.0" prefWidth="53.0" styleClass="custom-hyperlink" text="Register" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

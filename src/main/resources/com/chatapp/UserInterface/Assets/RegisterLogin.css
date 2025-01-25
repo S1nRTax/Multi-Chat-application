@@ -1,0 +1,100 @@
+/* RegisterLogin.css */
+
+/* Root styles */
+.root {
+    -fx-background-size: cover; /* Scale the image to cover the entire background */
+    -fx-background-position: center; /* Center the image */
+    -fx-background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+/* Styles for login labels */
+.login-labels {
+    -fx-fill: white; /* Set text color to white */
+    -fx-font-size: 12px; /* Set font size */
+    -fx-font-weight: bold; /* Make text bold */
+}
+
+.need-account {
+    -fx-fill: lightgray;
+    -fx-font-size: 12px;
+}
+
+.welcome-label{
+    -fx-fill: white;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}
+
+.custom-hyperlink {
+    -fx-text-fill: #0078d7; /* Blue text color */
+    -fx-underline: false; /* No underline by default */
+    -fx-border-color: transparent; /* Remove border */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-cursor: hand; /* Change cursor to a hand on hover */
+}
+
+/* Hover effect for the custom hyperlink */
+.custom-hyperlink:hover {
+    -fx-underline: true; /* Underline on hover */
+    -fx-text-fill: #0078d7; /* Keep the same blue color on hover */
+}
+
+/* Visited state for the custom hyperlink */
+.custom-hyperlink:visited {
+    -fx-text-fill: #0078d7; /* Keep the same blue color after being clicked */
+}
+
+.custom-button {
+    -fx-background-color: #5b209a;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Hover effect for the button */
+.custom-button:hover {
+    -fx-background-color: #7e61ab; /* Darker blue on hover */
+}
+
+/* Pressed effect for the button */
+.custom-button:pressed {
+    -fx-background-color: #5b209a; /* Even darker blue when pressed */
+}
+
+.excited-label {
+    -fx-fill: lightgray;
+    -fx-font-size: 15px;
+}
+
+
+/* Styles for input fields */
+.input-field {
+    -fx-background-color: #f0f0f0; /* Light gray background */
+    -fx-border-color: #cccccc; /* Light gray border */
+    -fx-border-radius: 6px; /* Rounded corners for the border */
+    -fx-background-radius: 6px; /* Rounded corners for the background */
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Hover effect for input fields */
+.input-field:hover {
+    -fx-border-color: #999999; /* Darker border on hover */
+}
+
+/* Focus effect for input fields */
+.input-field:focused {
+    -fx-border-color: #0078d7; /* Blue border when focused */
+    -fx-background-color: #ffffff; /* White background when focused */
+}
+
+/* Styles for the login pane */
+#loginPane {
+    -fx-background-color: #36393F;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-padding: 20px;
+}

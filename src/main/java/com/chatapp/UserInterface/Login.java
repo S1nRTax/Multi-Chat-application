@@ -6,18 +6,27 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-public class RegisterLogin {
+public class Login {
+
+    private MainUI mainUI; // Reference to the MainUI instance
+
+    public Login(MainUI mainUI) {
+        this.mainUI = mainUI;
+    }
 
     public BorderPane createContent() {
         BorderPane root = new BorderPane();
 
         try {
             // Load the FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/chatapp/UserInterface/RegisterLogin.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/chatapp/UserInterface/Login.fxml"));
             Parent fxmlRoot = loader.load();
             root.setCenter(fxmlRoot);
-            RegisterLoginController controller = loader.getController();
+
+            // Pass the MainUI instance to the controller
+            LoginController controller = loader.getController();
             if (controller != null) {
+                controller.setMainUI(mainUI); // Set the MainUI instance
                 System.out.println("FXML controller loaded successfully.");
             }
         } catch (IOException e) {

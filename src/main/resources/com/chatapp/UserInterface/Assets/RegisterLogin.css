@@ -7,6 +7,14 @@
     -fx-background-repeat: no-repeat; /* Prevent the image from repeating */
 }
 
+.registerPane-custom{
+    -fx-background-color: #36393F;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-padding: 20px;
+}
+
 /* Styles for login labels */
 .login-labels {
     -fx-fill: white; /* Set text color to white */

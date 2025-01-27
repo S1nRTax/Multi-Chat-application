@@ -6,18 +6,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
-    private final String username;
-    private final char[] password;
     private ChannelHandlerContext ctx;
     private static final Logger _logger = LoggerFactory.getLogger(ChatClientHandler.class);
+    private boolean isConnected = false;
 
-    public ChatClientHandler(String username, char[] password) {
-        this.username = username;
-        this.password = password;
+    public ChatClientHandler() {
+    }
+
+    public boolean isConnected() {
+        return isConnected;
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx){
+        this.ctx = ctx;
+        this.isConnected = true;
         _logger.info("Client connected");
     }
 
@@ -48,4 +51,7 @@ public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
         }
     }
 
+    public ChannelHandlerContext getCtx() {
+        return ctx;
+    }
 }

@@ -40,7 +40,7 @@ public class ChatServer {
                         }
                     });
 
-            ChannelFuture future = bootstrap.bind("192.168.1.3", port).sync();
+            ChannelFuture future = bootstrap.bind("localhost", port).sync();
             // starts the console command handlers as daemon thread to not block the server shutdown.
             ChatServerHandler chatServerHandler = new ChatServerHandler();
             Thread consoleThread = new Thread(new ConsoleCommandHandler(chatServerHandler));

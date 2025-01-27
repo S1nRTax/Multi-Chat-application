@@ -3,12 +3,15 @@ package com.chatapp.UserInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class Login {
 
     private MainUI mainUI; // Reference to the MainUI instance
+    private static final Logger _logger = LoggerFactory.getLogger(Login.class);
 
     public Login(MainUI mainUI) {
         this.mainUI = mainUI;
@@ -27,12 +30,9 @@ public class Login {
             LoginController controller = loader.getController();
             if (controller != null) {
                 controller.setMainUI(mainUI); // Set the MainUI instance
-                System.out.println("FXML controller loaded successfully.");
             }
         } catch (IOException e) {
-            // Handle errors during FXML loading
-            System.err.println("Error loading FXML file: " + e.getMessage());
-            e.printStackTrace();
+            _logger.error("Error loading FXML file: {}" , e.getMessage());
         }
 
         return root;

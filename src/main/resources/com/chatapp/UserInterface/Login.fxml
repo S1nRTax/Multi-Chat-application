@@ -19,7 +19,7 @@
             <Text layoutX="137.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcome-label" text="Welcome back !" textAlignment="CENTER" wrappingWidth="355.0" />
             <Text layoutX="137.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="excited-label" text="We're so excited to see you again" textAlignment="CENTER" wrappingWidth="355.0" />
             <Hyperlink layoutX="137.0" layoutY="271.0" prefHeight="23.0" prefWidth="146.0" styleClass="custom-hyperlink" text="Forgot your password?" />
-            <Button fx:id="loginButton" layoutX="137.0" layoutY="309.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="355.0" styleClass="custom-button" text="Log in" />
+            <Button fx:id="loginButton" layoutX="137.0" layoutY="309.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="355.0" onAction="#handleLogin" styleClass="custom-button" text="Log in" />
             <Text layoutX="137.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="need-account" text="Need an account?" wrappingWidth="106.13671875" />
             <Hyperlink fx:id="registerLink" layoutX="230.0" layoutY="354.0" onAction="#handleRegisterLink" prefHeight="23.0" prefWidth="53.0" styleClass="custom-hyperlink" text="Register" />
          </children>

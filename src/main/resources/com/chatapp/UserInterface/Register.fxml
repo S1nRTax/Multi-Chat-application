@@ -20,7 +20,7 @@
                 <Text fx:id="passwordLabel" layoutX="138.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login-labels" text="PASSWORD *" wrappingWidth="263.0" />
                 <Text layoutX="137.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcome-label" text="Create an account" textAlignment="CENTER" wrappingWidth="355.0" />
                 <Text layoutX="137.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="excited-label" text="Join us today!" textAlignment="CENTER" wrappingWidth="355.0" />
-                <Button fx:id="registerButton" layoutX="137.0" layoutY="278.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="355.0" styleClass="custom-button" text="Register" />
+                <Button fx:id="registerButton" layoutX="137.0" layoutY="278.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="355.0" onAction="#handleRegister" styleClass="custom-button" text="Register" />
                 <Text layoutX="137.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="need-account" text="Already have an account?" wrappingWidth="148.13671875" />
                 <Hyperlink fx:id="loginLink" layoutX="270.0" layoutY="318.0" onAction="#handleLoginLink" prefHeight="23.0" prefWidth="53.0" styleClass="custom-hyperlink" text="Login" />
             </children>

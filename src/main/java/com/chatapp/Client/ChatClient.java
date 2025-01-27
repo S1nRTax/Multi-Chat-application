@@ -15,16 +15,22 @@ import org.slf4j.LoggerFactory;
 public class ChatClient {
     private final String host;
     private final int port;
-    private final String username;
-    private final char[] password;
     private ChatClientHandler handler;
     private static final Logger _logger = LoggerFactory.getLogger(ChatClient.class);
 
-    public ChatClient(String host, int port, String username, char[] password) {
+    public boolean isConnected() {
+        return handler != null && handler.isConnected();
+    }
+
+    public void setHandler(ChatClientHandler handler) {
+        this.handler = handler;
+    }
+
+    public ChatClient(String host, int port) {
         this.host = host;
         this.port = port;
-        this.username = username;
-        this.password = password;
+
+        handler = new ChatClientHandler();
     }
 
 

@@ -49,7 +49,6 @@ public class RegisterController {
                 String username = usernameField.getText();
                 String email = emailField.getText();
                 String password = passwordField.getText();
-                _logger.info("Register info: {}, {}, {}", username, email, password);
                 chatClient.sendMessage("/register " + username + " " + email + " " + password);
             }catch (Exception e){
                 _logger.error(e.getMessage(), e);

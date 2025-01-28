@@ -48,8 +48,6 @@ public class LoginController {
                 // Now send the login message
                 String username = emailTextField.getText();
                 String password = passwordField.getText();
-                _logger.info("Username is: {}", username);
-                _logger.info("Password is: {}", password);
                 chatClient.sendMessage("/login " + username + " " + password);
             } catch (Exception e) {
                 _logger.error(e.getMessage(), e);

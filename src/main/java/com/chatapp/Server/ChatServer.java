@@ -2,6 +2,7 @@ package com.chatapp.Server;
 
 
 import com.chatapp.Client.ChatClient;
+import com.chatapp.database.DatabaseInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -63,6 +64,7 @@ public class ChatServer {
 
 
     public static void main(String[] args) throws InterruptedException {
+        DatabaseInitializer.initializeDB();
         new ChatServer(8080).start();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             _logger.info("Shutting down server...");

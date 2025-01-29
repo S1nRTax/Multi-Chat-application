@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="RegisterLoginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatapp.UserInterface.LoginController">
@@ -19,9 +20,14 @@
             <Text layoutX="137.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcome-label" text="Welcome back !" textAlignment="CENTER" wrappingWidth="355.0" />
             <Text layoutX="137.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="excited-label" text="We're so excited to see you again" textAlignment="CENTER" wrappingWidth="355.0" />
             <Hyperlink layoutX="137.0" layoutY="271.0" prefHeight="23.0" prefWidth="146.0" styleClass="custom-hyperlink" text="Forgot your password?" />
-            <Button fx:id="loginButton" layoutX="137.0" layoutY="309.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="355.0" onAction="#handleLogin" styleClass="custom-button" text="Log in" />
+            <Button fx:id="loginButton" layoutX="137.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="33.0" prefWidth="355.0" styleClass="custom-button" text="Log in" />
             <Text layoutX="137.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="need-account" text="Need an account?" wrappingWidth="106.13671875" />
             <Hyperlink fx:id="registerLink" layoutX="230.0" layoutY="354.0" onAction="#handleRegisterLink" prefHeight="23.0" prefWidth="53.0" styleClass="custom-hyperlink" text="Register" />
+            <Text fx:id="errorLabel" fill="RED" layoutX="137.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="355.0">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>

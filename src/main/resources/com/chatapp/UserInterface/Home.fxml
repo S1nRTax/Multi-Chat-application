@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane prefHeight="636.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatapp.UserInterface.Home">
+   <children>
+      <Pane layoutX="202.0" layoutY="73.0" prefHeight="490.0" prefWidth="591.0" />
+   </children>
+</AnchorPane>

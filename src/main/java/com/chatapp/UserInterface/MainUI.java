@@ -76,6 +76,12 @@ public class MainUI extends Application {
         root.getChildren().add(registerContent);
     }
 
+    // Method to switch to the Home tab
+    public void switchToHome(){
+
+    }
+
+
     public ChatClient getChatClient() {
         return this.chatClient;
     }

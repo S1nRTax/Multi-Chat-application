@@ -5,10 +5,17 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.function.Consumer;
+
 public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
     private ChannelHandlerContext ctx;
     private static final Logger _logger = LoggerFactory.getLogger(ChatClientHandler.class);
+    private Consumer<String> messageConsumer;
     private boolean isConnected = false;
+
+    public void setMessageConsumer(Consumer<String> messageConsumer) {
+        this.messageConsumer = messageConsumer;
+    }
 
     public ChatClientHandler() {
     }
@@ -27,11 +34,14 @@ public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) {
         String[] messages = msg.split("/n");
-        for(String singleMsg : messages){
-            if(singleMsg.trim().isEmpty() || singleMsg.trim().equals("/")){
-                _logger.warn("Invalid message received");}
-            else{
-                _logger.info("Server received: {}", singleMsg);
+        for(String singleMsg : messages) {
+            if (singleMsg.trim().isEmpty() || singleMsg.trim().equals("/")) {
+                _logger.warn("Invalid message received");
+            }else{
+                _logger.debug("Server received: {}", singleMsg);
+                if (messageConsumer != null) {
+                    messageConsumer.accept(singleMsg);
+                }
             }
         }
     }

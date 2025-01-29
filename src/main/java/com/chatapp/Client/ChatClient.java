@@ -22,6 +22,10 @@ public class ChatClient {
         return handler != null && handler.isConnected();
     }
 
+    public ChatClientHandler getHandler() {
+        return handler;
+    }
+
     public void setHandler(ChatClientHandler handler) {
         this.handler = handler;
     }

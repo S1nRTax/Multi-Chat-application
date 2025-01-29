@@ -4,6 +4,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.group.ChannelGroup;
 import org.slf4j.*;
 import com.chatapp.database.DAO;
+
+import java.sql.SQLException;
 import java.util.Map;
 
 public class ServerMethods {
@@ -25,20 +27,21 @@ public class ServerMethods {
             String password = parts[2];
             try{
                 DAO.InsertResult error = DAO.loginUser(username, password);
-                if(error == DAO.InsertResult.SUCCESS){
+                _logger.debug(error.getMessage());
+                if(error.equals(DAO.InsertResult.SUCCESS)){
                     authenticatedUsers.put(username, ctx);
+                    ctx.writeAndFlush("Login successful\r\n");
                     _logger.info("User {} logged in",username);
-
                     // TODO: load friend list.
-
-                }else{
-                    ctx.writeAndFlush("Authentication Failed: " + error.getMessage());
-                    _logger.error("Authentication failed for {} - {}", username , error.getMessage());
+                }else if(error.equals(DAO.InsertResult.User_Not_Found)){
+                    ctx.writeAndFlush("Authentication Failed : " + error.getMessage());
+                }else if(error.equals(DAO.InsertResult.Incorrect_Password)){
+                    ctx.writeAndFlush("Authentication Failed : " + error.getMessage());
                 }
 
             }catch(Exception e){
-                ctx.writeAndFlush("Internal error");
                 _logger.error(e.getMessage(), e);
+                ctx.writeAndFlush("Internal error");
             }
         }else{
             _logger.error("Invalid login format. Use: /login username password\n");
@@ -58,7 +61,7 @@ public class ServerMethods {
             try{
                 DAO.InsertResult error = DAO.registerUser(username, email, password);
                 if(error == DAO.InsertResult.SUCCESS){
-                    ctx.writeAndFlush("User " + username + " registered\n");
+                    ctx.writeAndFlush("Registration successful");
                     _logger.info("User {} registered", username);
                 }else{
                     ctx.writeAndFlush("Problem registering user " + username + ". Try again later.\n");

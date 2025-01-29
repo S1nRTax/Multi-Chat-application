@@ -17,7 +17,7 @@ This project is a real-time multi-chat application built using **JavaFX** for th
 ## Getting Started
 
 ### Prerequisites
-- Java Development Kit (JDK) 8 or higher.
+- Java Development Kit (JDK) 23.
 - Maven for dependency management.
 - IntelliJ IDEA or any IDE of your choice.
 
@@ -38,7 +38,8 @@ This project is a real-time multi-chat application built using **JavaFX** for th
 
 
 ### License
-This project is licensed under the MIT License. Feel free to use, modify, and distribute the software.
+This project is licensed under the MIT License. Feel free to use, modify, and distribute the software, but please credit me if you use it.
+
 
 ### Author
 Developed by Badreddine Asaad.

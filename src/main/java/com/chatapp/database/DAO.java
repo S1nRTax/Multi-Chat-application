@@ -16,7 +16,7 @@ public class DAO {
         Email_Not_Valid("Email is not valid."),
         Password_Not_Valid("Weak password."),
         Incorrect_Password("Incorrect password, please try again."),
-        User_Not_Found("User not found, enter correct credentials."),
+        User_Not_Found("Invalid credentials. Please try again."),
         User_does_not_Exists("User does not exists, Please enter correct Username."),
         Friend_Request_SUCCESS("Friend request sent successfully."),
         Friend_Request_ACCEPTED("Friend request accepted."),

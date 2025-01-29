@@ -49,28 +49,44 @@ public class ServerMethods {
         }
     }
 
-
     public void handleRegister(ChannelHandlerContext ctx, String message) {
         message = message.trim();
-        String[] parts = message.split(" ",4);
-        if(parts.length == 4){
-            String username = parts[1];
-            String email = parts[2];
-            String password = parts[3];
+        String[] parts = message.split(" ", 4);
 
-            try{
-                DAO.InsertResult error = DAO.registerUser(username, email, password);
-                if(error == DAO.InsertResult.SUCCESS){
+        // Early validation
+        if (parts.length != 4) {
+            ctx.writeAndFlush("Invalid registration format. Usage: register <username> <email> <password>");
+            return;
+        }
+
+        String username = parts[1];
+        String email = parts[2];
+        String password = parts[3];
+
+        try {
+            DAO.InsertResult error = DAO.registerUser(username, email, password);
+
+            // Handle the result using a switch statement
+            switch (error) {
+                case SUCCESS:
                     ctx.writeAndFlush("Registration successful");
                     _logger.info("User {} registered", username);
-                }else{
-                    ctx.writeAndFlush("Problem registering user " + username + ". Try again later.\n");
-                    _logger.error("Problem registering user {} - {}. Try again later.", username, error.getMessage());
-                }
-            }catch (Exception e){
-                _logger.error("Internal error");
-                _logger.error(e.getMessage(), e);
+                    break;
+                case Email_Not_Valid:
+                case USERNAME_TAKEN:
+                case Email_Taken:
+                case Password_Not_Valid:
+                    ctx.writeAndFlush("Problem registering user : " + error.getMessage());
+                    _logger.warn("Registration failed for user {}: {}", username, error.getMessage());
+                    break;
+                default:
+                    ctx.writeAndFlush("Problem registering user : Unknown error during registration, please try again later.");
+                    _logger.error("Unknown registration error for user {}: {}", username, error);
+                    break;
             }
+        } catch (Exception e) {
+            _logger.error("Internal error during registration for user {}", username, e);
+            ctx.writeAndFlush("Internal server error during registration");
         }
     }
 

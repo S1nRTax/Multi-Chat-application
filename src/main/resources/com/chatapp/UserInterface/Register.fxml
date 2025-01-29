@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="RegisterPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatapp.UserInterface.RegisterController">
@@ -20,9 +21,14 @@
                 <Text fx:id="passwordLabel" layoutX="138.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login-labels" text="PASSWORD *" wrappingWidth="263.0" />
                 <Text layoutX="137.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcome-label" text="Create an account" textAlignment="CENTER" wrappingWidth="355.0" />
                 <Text layoutX="137.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="excited-label" text="Join us today!" textAlignment="CENTER" wrappingWidth="355.0" />
-                <Button fx:id="registerButton" layoutX="137.0" layoutY="278.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="355.0" onAction="#handleRegister" styleClass="custom-button" text="Register" />
+                <Button fx:id="registerButton" layoutX="137.0" layoutY="278.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="33.0" prefWidth="355.0" styleClass="custom-button" text="Register" />
                 <Text layoutX="137.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="need-account" text="Already have an account?" wrappingWidth="148.13671875" />
                 <Hyperlink fx:id="loginLink" layoutX="270.0" layoutY="318.0" onAction="#handleLoginLink" prefHeight="23.0" prefWidth="53.0" styleClass="custom-hyperlink" text="Login" />
+            <Text fx:id="errorLabel" fill="RED" layoutX="137.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="355.0">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Text>
             </children>
         </Pane>
     </children>

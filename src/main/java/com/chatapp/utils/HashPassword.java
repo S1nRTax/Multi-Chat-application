@@ -1,6 +1,5 @@
 package com.chatapp.utils;
 
-
 import org.bouncycastle.crypto.generators.Argon2BytesGenerator;
 import org.bouncycastle.crypto.params.Argon2Parameters;
 import java.security.SecureRandom;
@@ -25,7 +24,11 @@ public class HashPassword {
         byte[] result = new byte[32]; // Output hash length
         generator.generateBytes(password.toCharArray(), result);
 
-        return Base64.getEncoder().encodeToString(result);
+        // Encode the salt and the hashed password to Base64 and concatenate them with a colon
+        String encodedSalt = Base64.getEncoder().encodeToString(salt);
+        String encodedHash = Base64.getEncoder().encodeToString(result);
+
+        return encodedSalt + ":" + encodedHash;
     }
 
     public static boolean verifyPassword(String password, String storedHash) {

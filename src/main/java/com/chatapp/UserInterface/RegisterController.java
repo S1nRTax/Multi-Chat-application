@@ -124,7 +124,7 @@ public class RegisterController {
                         errorLabel.setText("");
                     });
                 }
-            }, 3500);
+            }, 5000);
         });
     }
 }

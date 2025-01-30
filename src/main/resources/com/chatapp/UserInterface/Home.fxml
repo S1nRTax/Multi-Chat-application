@@ -1,11 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="636.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatapp.UserInterface.Home">
-   <children>
-      <Pane layoutX="202.0" layoutY="73.0" prefHeight="490.0" prefWidth="591.0" />
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Pane prefHeight="565.0" prefWidth="598.0" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <Pane prefHeight="565.0" prefWidth="188.0" style="-fx-background-color: #bfbfbf;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="WHITE" layoutX="7.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DIRECT MESSAGES" wrappingWidth="171.13671875" />
+            <Separator layoutX="-4.0" layoutY="89.0" prefHeight="0.0" prefWidth="194.0" />
+         </children>
+      </Pane>
+   </left>
+   <right>
+      <Pane prefHeight="565.0" prefWidth="200.0" style="-fx-background-color: #bfbfbf;" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="3.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" textAlignment="CENTER" wrappingWidth="194.13671875">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </right>
+   <top>
+      <Pane prefHeight="107.0" prefWidth="932.0" style="-fx-background-color: #bfbfbf;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="71.0" fitWidth="86.0" layoutX="14.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Assets/logo.png" /> <!-- Ensure the path is correct -->
+               </image>
+            </ImageView>
+            <Text layoutX="99.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to chat app. Add friends, Chat, enjoy !" wrappingWidth="537.13671875">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </top>
+</BorderPane>

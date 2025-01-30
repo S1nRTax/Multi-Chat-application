@@ -21,7 +21,6 @@ public class MainUI extends Application {
     public void start(Stage stage) throws Exception {
         root = new StackPane();
 
-        // Start the ChatClient when the application launches
         chatClient = new ChatClient("localhost", 8080);
         new Thread(() -> {
             try {
@@ -30,7 +29,6 @@ public class MainUI extends Application {
                 _logger.error("Failed to start the Client: {}", e.getMessage(), e);
             }
         }, "ChatClient Thread").start();
-
 
         Image backgroundImage = new Image(getClass().getResourceAsStream("/com/chatapp/UserInterface/Assets/background-image.png"));
         ImageView backgroundImageView = new ImageView(backgroundImage);
@@ -63,29 +61,28 @@ public class MainUI extends Application {
     // Method to switch to the Login scene
     public void switchToLogin() {
         Login authUI = new Login(this);
-        BorderPane loginContent = authUI.createContent();
-        root.getChildren().removeIf(node -> node instanceof BorderPane);
+        BorderPane loginContent = authUI.createContent(); // Change return type to StackPane
+        root.getChildren().removeIf(node -> node instanceof StackPane );
         root.getChildren().add(loginContent);
     }
 
     // Method to switch to the Register scene
     public void switchToRegister() {
         Register authUI = new Register(this);
-        BorderPane registerContent = authUI.createContent();
-        root.getChildren().removeIf(node -> node instanceof BorderPane);
+        BorderPane registerContent = authUI.createContent(); // Change return type to StackPane
+        root.getChildren().removeIf(node -> node instanceof StackPane);
         root.getChildren().add(registerContent);
     }
 
     // Method to switch to the Home tab
-    public void switchToHome(){
-
+    public void switchToHome() {
+        Home home = new Home(this);
+        StackPane homeContent = home.createContent(); // Ensure Home.createContent() returns a StackPane
+        root.getChildren().removeIf(node -> node instanceof StackPane);
+        root.getChildren().add(homeContent);
     }
-
 
     public ChatClient getChatClient() {
         return this.chatClient;
     }
-
-    // Method to switch to the Home scene.
-
 }

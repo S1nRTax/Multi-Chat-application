@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -14,8 +15,9 @@ import com.chatapp.Client.ChatClient;
 public class MainUI extends Application {
     private ChatClient chatClient;
     private static final Logger _logger = LoggerFactory.getLogger(MainUI.class);
-    private StackPane root; // Store the root StackPane
-    private Scene scene; // Store the main scene
+    private StackPane root;
+    private Scene scene;
+    private ImageView backgroundImageView;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -31,7 +33,7 @@ public class MainUI extends Application {
         }, "ChatClient Thread").start();
 
         Image backgroundImage = new Image(getClass().getResourceAsStream("/com/chatapp/UserInterface/Assets/background-image.png"));
-        ImageView backgroundImageView = new ImageView(backgroundImage);
+        backgroundImageView = new ImageView(backgroundImage);
 
         GaussianBlur blur = new GaussianBlur();
         blur.setRadius(10);
@@ -39,9 +41,6 @@ public class MainUI extends Application {
 
         root.getChildren().add(backgroundImageView);
 
-        switchToLogin();
-
-        // Create the scene
         scene = new Scene(root, 1280, 720);
 
         // Load the CSS file
@@ -52,6 +51,9 @@ public class MainUI extends Application {
             _logger.warn("Unable to load stylesheet");
         }
 
+        // Call switchToLogin AFTER the scene is created
+        switchToLogin();
+
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Chat Application by S1ntax_");
@@ -61,25 +63,49 @@ public class MainUI extends Application {
     // Method to switch to the Login scene
     public void switchToLogin() {
         Login authUI = new Login(this);
-        BorderPane loginContent = authUI.createContent(); // Change return type to StackPane
-        root.getChildren().removeIf(node -> node instanceof StackPane );
+        BorderPane loginContent = authUI.createContent();
+        // Remove only the content nodes (excluding the background image)
+        root.getChildren().removeIf(node -> node != backgroundImageView);
         root.getChildren().add(loginContent);
+        String loginCss = this.getClass().getResource("/com/chatapp/UserInterface/Assets/RegisterLogin.css").toExternalForm();
+        if (loginCss != null && !loginCss.isEmpty()) {
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(loginCss);
+        } else {
+            _logger.warn("Unable to load RegisterLogin.css stylesheet");
+        }
     }
 
     // Method to switch to the Register scene
     public void switchToRegister() {
         Register authUI = new Register(this);
-        BorderPane registerContent = authUI.createContent(); // Change return type to StackPane
-        root.getChildren().removeIf(node -> node instanceof StackPane);
+        BorderPane registerContent = authUI.createContent();
+        root.getChildren().removeIf(node -> node != backgroundImageView);
         root.getChildren().add(registerContent);
+        String registerCss = this.getClass().getResource("/com/chatapp/UserInterface/Assets/RegisterLogin.css").toExternalForm();
+        if (registerCss != null && !registerCss.isEmpty()) {
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(registerCss);
+        } else {
+            _logger.warn("Unable to load RegisterLogin.css stylesheet");
+        }
     }
 
     // Method to switch to the Home tab
     public void switchToHome() {
         Home home = new Home(this);
-        StackPane homeContent = home.createContent(); // Ensure Home.createContent() returns a StackPane
-        root.getChildren().removeIf(node -> node instanceof StackPane);
+        AnchorPane homeContent = home.createContent();
+        homeContent.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        // Remove only the content nodes (excluding the background image)
+        root.getChildren().removeIf(node -> node != backgroundImageView);
         root.getChildren().add(homeContent);
+        String homeCss = this.getClass().getResource("/com/chatapp/UserInterface/Assets/Home.css").toExternalForm();
+        if (homeCss != null && !homeCss.isEmpty()) {
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(homeCss);
+        } else {
+            _logger.warn("Unable to load Home.css stylesheet");
+        }
     }
 
     public ChatClient getChatClient() {

@@ -2,6 +2,7 @@ package com.chatapp.UserInterface;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane; // Use StackPane instead of BorderPane
 import org.slf4j.*;
 
@@ -15,17 +16,18 @@ public class Home {
         this.mainUI = mainUI;
     }
 
-    public StackPane createContent() { // Change return type to StackPane
-        StackPane root = new StackPane(); // Use StackPane instead of BorderPane
+    public AnchorPane createContent() {
+        AnchorPane root = new AnchorPane();
+        root.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/chatapp/UserInterface/Home.fxml"));
             Parent fxmlRoot = loader.load();
-            root.getChildren().add(fxmlRoot); // Add the FXML content to the StackPane
+            root.getChildren().add(fxmlRoot);
 
             HomeController controller = loader.getController();
             if (controller != null) {
-                controller.setMainUI(mainUI); // Set the MainUI instance
+                controller.setMainUI(mainUI);
             }
         } catch (IOException e) {
             _logger.error(e.getMessage());

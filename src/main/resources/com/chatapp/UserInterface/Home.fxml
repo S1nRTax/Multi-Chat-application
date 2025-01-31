@@ -9,15 +9,16 @@
 
 <AnchorPane maxHeight="720" maxWidth="1280" minHeight="720" minWidth="1280" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatapp.UserInterface.HomeController">
    <children>
-      <Pane layoutY="1.0" maxHeight="735.0" prefHeight="720.0" prefWidth="242.0" style="-fx-background-color: #36393F;">
+      <Pane layoutY="1.0" maxHeight="735.0" prefHeight="720.0" prefWidth="242.0" styleClass="lp">
          <children>
             <Separator layoutY="123.0" prefHeight="0.0" prefWidth="242.0" />
             <Separator layoutY="607.0" prefHeight="3.0" prefWidth="242.0" />
-            <Text layoutX="48.0"  layoutY="634.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UrUSERNAME"  styleClass="lp-text" wrappingWidth="167.13671875" />
+            <Text layoutX="48.0" layoutY="634.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lp-text" text="UrUSERNAME" wrappingWidth="167.13671875" />
             <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="14.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true" />
-            <Text layoutX="48.0" layoutY="663.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UrEmail" styleClass="lp-text" wrappingWidth="98.13671875" />
-            <Text layoutX="31.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DIRECT MESSAGES" styleClass="lp-text" wrappingWidth="201.0" />
-            <Button layoutX="4.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="233.0" text="Friends" styleClass="lf-btn" />
+            <Text layoutX="48.0" layoutY="663.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lp-text" text="UrEmail" wrappingWidth="98.13671875" />
+            <Text layoutX="31.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lp-text" text="DIRECT MESSAGES" wrappingWidth="201.0" />
+            <Button layoutX="4.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="233.0" styleClass="lf-btn" text="Friends" />
          </children></Pane>
+      <Pane layoutX="242.0" layoutY="1.0" prefHeight="720.0" prefWidth="1045.0" styleClass="rp" />
    </children>
 </AnchorPane>

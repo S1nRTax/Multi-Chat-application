@@ -52,12 +52,18 @@
             <version>1.4.7</version>
         </dependency>
 
+	<dependency>
+   	  <groupId>io.github.cdimascio</groupId>
+  	  <artifactId>dotenv-java</artifactId>
+   	  <version>3.0.0</version>
+	</dependency>
 
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.6.0</version>  <!-- Use latest version -->
         </dependency>
+
     </dependencies>
 
 

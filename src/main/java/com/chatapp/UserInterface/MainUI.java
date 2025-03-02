@@ -11,6 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.slf4j.*;
 import com.chatapp.Client.ChatClient;
+import com.chatapp.models.connUser;
 
 public class MainUI extends Application {
     private ChatClient chatClient;
@@ -92,8 +93,8 @@ public class MainUI extends Application {
     }
 
     // Method to switch to the Home tab
-    public void switchToHome() {
-        Home home = new Home(this);
+    public void switchToHome(connUser connectedUser) {
+        Home home = new Home(this, connectedUser);
         AnchorPane homeContent = home.createContent();
         homeContent.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         // Remove only the content nodes (excluding the background image)

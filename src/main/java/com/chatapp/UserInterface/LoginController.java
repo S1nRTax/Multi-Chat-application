@@ -1,5 +1,6 @@
 package com.chatapp.UserInterface;
 
+import com.chatapp.database.DAO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
@@ -10,7 +11,8 @@ import javafx.scene.text.Text;
 import org.slf4j.*;
 import java.util.Timer;
 import java.util.TimerTask;
-import javafx.application.Platform;
+import com.chatapp.database.DAO;
+import com.chatapp.models.connUser;
 
 public class LoginController {
     private static final Logger _logger = LoggerFactory.getLogger(LoginController.class);
@@ -63,7 +65,7 @@ public class LoginController {
                     showError("password must not be empty!");
                 }
                 chatClient.sendMessage("/login " + username + " " + password);
-                initializeMessageHandler();
+                initializeMessageHandler(username);
             } catch (Exception e) {
                 _logger.error(e.getMessage(), e);
             }
@@ -71,13 +73,15 @@ public class LoginController {
     }
 
 
-    private void initializeMessageHandler() {
+    private void initializeMessageHandler(String username) {
         // Set up the message consumer to handle server responses
         chatClient.getHandler().setMessageConsumer(message -> {
             Platform.runLater(() -> {
                 if (message.startsWith("Login successful")) {
                     _logger.debug("Login successful");
-                    mainUI.switchToHome();
+                    String email = DAO.getUserEmailByUsername(username);
+                    connUser connectedUser = new connUser(email, username);
+                    mainUI.switchToHome(connectedUser);
                 } else if (message.startsWith("Authentication Failed")) {
                     String[] parts = message.split(":",2);
                     _logger.info("Login failed: {}", message);

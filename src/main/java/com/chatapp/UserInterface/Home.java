@@ -1,18 +1,20 @@
 package com.chatapp.UserInterface;
 
+import com.chatapp.models.connUser;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane; // Use StackPane instead of BorderPane
 import org.slf4j.*;
 
 import java.io.IOException;
 
 public class Home {
     private MainUI mainUI;
+    private connUser connectedUser;
     private static final Logger _logger = LoggerFactory.getLogger(Home.class);
 
-    public Home(MainUI mainUI) {
+    public Home(MainUI mainUI, connUser connectedUser) {
+        this.connectedUser = connectedUser;
         this.mainUI = mainUI;
     }
 
@@ -28,6 +30,7 @@ public class Home {
             HomeController controller = loader.getController();
             if (controller != null) {
                 controller.setMainUI(mainUI);
+                controller.setConnectedUser(connectedUser);
             }
         } catch (IOException e) {
             _logger.error(e.getMessage());

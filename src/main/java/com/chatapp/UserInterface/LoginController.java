@@ -1,6 +1,7 @@
 package com.chatapp.UserInterface;
 
 import com.chatapp.database.DAO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
@@ -77,16 +78,25 @@ public class LoginController {
         // Set up the message consumer to handle server responses
         chatClient.getHandler().setMessageConsumer(message -> {
             Platform.runLater(() -> {
-                if (message.startsWith("Login successful")) {
+                String[] lines = message.split("\n");
+                if (lines.length >= 2 && lines[0].startsWith("Login successful")) {
                     _logger.debug("Login successful");
-                    String email = DAO.getUserEmailByUsername(username);
-                    connUser connectedUser = new connUser(email, username);
-                    mainUI.switchToHome(connectedUser);
+                    String jsonPart = lines[1].trim(); // The JSON is on the second line
+                    _logger.debug("Received JSON: {}", jsonPart);
+
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    try {
+                        connUser desUser = objectMapper.readValue(jsonPart, connUser.class);
+                        mainUI.switchToHome(desUser);
+                    } catch (Exception e) {
+                        showError("Internal server error: Failed to parse user data");
+                        _logger.error("Failed to parse JSON: {}", jsonPart, e);
+                    }
                 } else if (message.startsWith("Authentication Failed")) {
-                    String[] parts = message.split(":",2);
+                    String[] parts = message.split(":", 2);
                     _logger.info("Login failed: {}", message);
-                    showError(parts[1]);
-                } else if(message.startsWith("Internal error")) {
+                    showError(parts.length > 1 ? parts[1].trim() : "Authentication failed");
+                } else if (message.startsWith("Internal error")) {
                     showError(message);
                 }
             });

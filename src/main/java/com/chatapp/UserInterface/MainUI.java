@@ -94,6 +94,7 @@ public class MainUI extends Application {
 
     // Method to switch to the Home tab
     public void switchToHome(connUser connectedUser) {
+        _logger.debug("Switching to home screen for user: {}", connectedUser.getUsername());
         Home home = new Home(this, connectedUser);
         AnchorPane homeContent = home.createContent();
         homeContent.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);

@@ -12,6 +12,10 @@ public class connUser {
 
     private String username;
     private String email;
+    // list of friends.
+
+    public connUser() {
+    }
 
     public connUser(String username, String email) {
         this.username = username;

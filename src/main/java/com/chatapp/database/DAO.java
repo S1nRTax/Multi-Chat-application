@@ -3,8 +3,12 @@ package com.chatapp.database;
 import com.chatapp.utils.HashPassword;
 import java.sql.*;
 import java.util.regex.Pattern;
+import com.chatapp.models.connUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DAO {
+    private static final Logger _logger = LoggerFactory.getLogger(DAO.class);
 
     // enumeration to store Error types.
     public enum InsertResult {
@@ -36,7 +40,6 @@ public class DAO {
             return message;
         }
     }
-
 
     public enum friendRequestState {
         Accept_Friend,
@@ -115,6 +118,25 @@ public class DAO {
         }catch(SQLException e) {
             System.err.println("Database error while connecting the User. "+ e.getMessage());
             return -1;
+        }
+    }
+
+    public static connUser getUserInfo(String username) {
+        try(Connection conn = DatabaseConnection.connect()){
+            String query = "SELECT username, email FROM users WHERE username = ?";
+            try(PreparedStatement stmt = conn.prepareStatement(query)){
+                stmt.setString(1, username);
+                try(ResultSet rs = stmt.executeQuery()){
+                    if(rs.next()) {
+                        return new connUser(rs.getString("username"), rs.getString("email"));
+                    }else{
+                        return null;
+                    }
+                }
+            }
+        }catch(SQLException e){
+            _logger.error(e.getMessage(), e);
+            return null;
         }
     }
 

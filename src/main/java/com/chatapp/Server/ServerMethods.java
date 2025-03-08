@@ -1,5 +1,8 @@
 package com.chatapp.Server;
 
+import com.chatapp.models.connUser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.prism.shader.AlphaOne_Color_Loader;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.group.ChannelGroup;
 import org.slf4j.*;
@@ -30,9 +33,15 @@ public class ServerMethods {
                 _logger.debug(error.getMessage());
                 if(error.equals(DAO.InsertResult.SUCCESS)){
                     authenticatedUsers.put(username, ctx);
-                    ctx.writeAndFlush("Login successful\r\n");
+
+                    connUser connUser = DAO.getUserInfo(username);
+
+                    // convert user object to JSON
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    String userJson = objectMapper.writeValueAsString(connUser);
+
+                    ctx.writeAndFlush("Login successful\r\n" + userJson + "\r\n");
                     _logger.info("User {} logged in",username);
-                    // TODO: load friend list.
                 }else if(error.equals(DAO.InsertResult.User_Not_Found)){
                     ctx.writeAndFlush("Authentication Failed : " + error.getMessage());
                 }else if(error.equals(DAO.InsertResult.Incorrect_Password)){
@@ -65,8 +74,6 @@ public class ServerMethods {
 
         try {
             DAO.InsertResult error = DAO.registerUser(username, email, password);
-
-            // Handle the result using a switch statement
             switch (error) {
                 case SUCCESS:
                     ctx.writeAndFlush("Registration successful");
@@ -89,5 +96,22 @@ public class ServerMethods {
             ctx.writeAndFlush("Internal server error during registration");
         }
     }
+
+//    public void getUserInfo(ChannelHandlerContext ctx, String message) {
+//        // message schema: /getUserInfo
+//        message = message.trim();
+//        String[] parts = message.split(" ",2);
+//        if (parts.length != 2) {
+//            _logger.error("Invalid username format. Usage: getUserInfo [username]");
+//            return;
+//        }
+//        String username = parts[1];
+//        try{
+//            connUser result = DAO.getUserInfo(username);
+//            ctx.writeAndFlush(result.getUsername() + " " + result.getEmail());
+//        }catch(Exception ex){
+//            _logger.error(ex.getMessage(), ex);
+//        }
+//    }
 
 }

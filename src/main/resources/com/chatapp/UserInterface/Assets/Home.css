@@ -14,9 +14,10 @@
 
 /* Text Styles in Left Pane */
 .lp-text {
-    -fx-fill: #ecf0f1;
+    -fx-font-family: "Monospaced";
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
+    -fx-fill: #000000; /* Change color as needed */
+    -fx-ellipsis-string: "...";
 }
 
 /* Button Styles */
@@ -35,6 +36,25 @@
 
 .lf-btn:pressed {
     -fx-background-color: #1abc9c;
+}
+
+/* Logout Button Styles */
+.lf-btn-logout {
+    -fx-background-color: #e74c3c; /* Red color for logout */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-padding: 8 16; /* Add padding for better appearance */
+}
+
+.lf-btn-logout:hover {
+    -fx-background-color: #c0392b; /* Darker red on hover */
+}
+
+.lf-btn-logout:pressed {
+    -fx-background-color: #96281b; /* Even darker red when pressed */
 }
 
 /* Separator Styles */

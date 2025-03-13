@@ -80,7 +80,7 @@ public class LoginController {
             Platform.runLater(() -> {
                 String[] lines = message.split("\n");
                 if (lines.length >= 2 && lines[0].startsWith("Login successful")) {
-                    _logger.debug("Login successful");
+                    _logger.info("Login successful");
                     String jsonPart = lines[1].trim(); // The JSON is on the second line
                     _logger.debug("Received JSON: {}", jsonPart);
 

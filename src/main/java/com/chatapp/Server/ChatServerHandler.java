@@ -46,6 +46,8 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
                 serverMethods.handleLogin(ctx, message);
             }else if(message.startsWith("/register ")) {
                 serverMethods.handleRegister(ctx, message);
+            }else if(message.startsWith("/logout ")){
+                serverMethods.handleLogout(ctx);
             }
     }
 

@@ -22,6 +22,15 @@ public class ServerMethods {
         this.channels = channels;
     }
 
+    public String getUsernameByContext(ChannelHandlerContext ctx) {
+        for(Map.Entry<String, ChannelHandlerContext> entry : authenticatedUsers.entrySet()) {
+            if(entry.getValue().equals(ctx)){
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
     public void handleLogin(ChannelHandlerContext ctx,String message) {
         message = message.trim();
         String[] parts = message.split(" ",3);
@@ -97,21 +106,16 @@ public class ServerMethods {
         }
     }
 
-//    public void getUserInfo(ChannelHandlerContext ctx, String message) {
-//        // message schema: /getUserInfo
-//        message = message.trim();
-//        String[] parts = message.split(" ",2);
-//        if (parts.length != 2) {
-//            _logger.error("Invalid username format. Usage: getUserInfo [username]");
-//            return;
-//        }
-//        String username = parts[1];
-//        try{
-//            connUser result = DAO.getUserInfo(username);
-//            ctx.writeAndFlush(result.getUsername() + " " + result.getEmail());
-//        }catch(Exception ex){
-//            _logger.error(ex.getMessage(), ex);
-//        }
-//    }
+    public void handleLogout(ChannelHandlerContext ctx){
+        String username = getUsernameByContext(ctx);
+        if (username != null) {
+            authenticatedUsers.remove(username);
+            ctx.writeAndFlush("Logout successful");
+        }else{
+            ctx.writeAndFlush("Logout failed");
+        }
+    }
+
+
 
 }

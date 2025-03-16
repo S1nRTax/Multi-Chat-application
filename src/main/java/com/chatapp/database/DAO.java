@@ -1,7 +1,10 @@
 package com.chatapp.database;
 
+import com.chatapp.models.Friend;
 import com.chatapp.utils.HashPassword;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import com.chatapp.models.connUser;
 import org.slf4j.Logger;
@@ -122,19 +125,23 @@ public class DAO {
     }
 
     public static connUser getUserInfo(String username) {
-        try(Connection conn = DatabaseConnection.connect()){
-            String query = "SELECT username, email FROM users WHERE username = ?";
-            try(PreparedStatement stmt = conn.prepareStatement(query)){
+        try (Connection conn = DatabaseConnection.connect()) {
+            String query = "SELECT id, username, email FROM users WHERE username = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setString(1, username);
-                try(ResultSet rs = stmt.executeQuery()){
-                    if(rs.next()) {
-                        return new connUser(rs.getString("username"), rs.getString("email"));
-                    }else{
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        int userId = rs.getInt("id");
+                        String email = rs.getString("email");
+                        List<Friend> friendList = queryUserFriends(userId);
+                        // Return a fully populated connUser object
+                        return new connUser(userId, username, email, friendList);
+                    } else {
                         return null;
                     }
                 }
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             _logger.error(e.getMessage(), e);
             return null;
         }
@@ -220,4 +227,34 @@ public class DAO {
             return InsertResult.Database_Error;
         }
     }
+
+    public static List<Friend> queryUserFriends(int id){
+        List<Friend> friendList = new ArrayList<>();
+        try(Connection conn = DatabaseConnection.connect()){
+            String query = "SELECT u.* FROM users u " +
+                    "JOIN friends f ON u.id = f.user1_id OR u.id = f.user2_id " +
+                    "WHERE (f.user1_id = ? OR f.user2_id = ?) AND u.id != ?";
+
+            try(PreparedStatement stmt = conn.prepareStatement(query)){
+                stmt.setInt(1, id);
+                stmt.setInt(2, id);
+                stmt.setInt(3, id);
+                try(ResultSet rs = stmt.executeQuery()){
+                    while(rs.next()){
+                        int friendId = rs.getInt("id");
+                        String friendUsername = rs.getString("username");
+                        Friend friend = new Friend(friendUsername, friendId);
+                        friendList.add(friend);
+                    }
+                }
+            }
+        }catch(SQLException e){
+            _logger.error(e.getMessage(), e);
+            return null;
+        }
+        return friendList;
+    }
+
+
+
 }

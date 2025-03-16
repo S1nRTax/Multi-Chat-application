@@ -12,7 +12,6 @@ public class DatabaseInitializer {
     public static void initializeDB() {
         try (Connection conn = DatabaseConnection.connect()) {
             if (conn != null) {
-                // Updated PostgreSQL-compatible table creation query
                 String createUsersTable = "CREATE TABLE IF NOT EXISTS users ("
                         + "id SERIAL PRIMARY KEY, "
                         + "username VARCHAR(50) NOT NULL UNIQUE, "
@@ -21,8 +20,27 @@ public class DatabaseInitializer {
                         + "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
                         + ")";
 
+                String createFriendRequestsTable = "CREATE TABLE IF NOT EXISTS friend_requests ("
+                        + "id SERIAL PRIMARY KEY, "
+                        + "sender_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE, "
+                        + "receiver_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE, "
+                        + "status VARCHAR(20) NOT NULL DEFAULT 'pending', "
+                        + "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+                        + "UNIQUE(sender_id, receiver_id)"
+                        + ")";
+
+                String createFriendsTable = "CREATE TABLE IF NOT EXISTS friends ("
+                        + "id SERIAL PRIMARY KEY, "
+                        + "user1_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE, "
+                        + "user2_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE, "
+                        + "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+                        + "UNIQUE(user1_id, user2_id)"
+                        + ")";
+
                 try (Statement stmt = conn.createStatement()) {
                     stmt.executeUpdate(createUsersTable);
+                    stmt.executeUpdate(createFriendRequestsTable);
+                    stmt.executeUpdate(createFriendsTable);
                 }
 
                 _logger.info("Database initialized successfully.");

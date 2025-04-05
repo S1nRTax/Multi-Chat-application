@@ -21,10 +21,14 @@
                </image></ImageView>
             <Text fx:id="emailText" layoutX="15.0" layoutY="609.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lp-text" wrappingWidth="210.13671875" />
             <Text layoutX="31.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lp-text" text="DIRECT MESSAGES" wrappingWidth="201.0" />
-            <Button layoutX="4.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="233.0" styleClass="lf-btn" text="Friends" />
+            <Button fx:id="friendsButton" layoutX="4.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleFriendsButton" prefHeight="31.0" prefWidth="233.0" styleClass="lf-btn" text="Friends" />
             <Button fx:id="logoutButton" layoutX="161.0" layoutY="683.0" mnemonicParsing="false" onAction="#handleLoginButton" styleClass="lf-btn-logout" text="Logout" />
          </children>
       </Pane>
-      <Pane layoutX="242.0" layoutY="1.0" prefHeight="720.0" prefWidth="1045.0" styleClass="rp" />
+      <Pane fx:id="rightPanel" layoutX="242.0" layoutY="1.0" prefHeight="720.0" prefWidth="1045.0" styleClass="rp">
+         <children>
+            <ListView fx:id="friendsListView" visible="false" managed="false" layoutX="14.0" layoutY="14.0" prefHeight="692.0" prefWidth="1017.0" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
